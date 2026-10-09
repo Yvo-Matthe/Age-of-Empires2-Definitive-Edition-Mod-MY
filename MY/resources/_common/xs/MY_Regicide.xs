@@ -5,6 +5,8 @@
    map is generated.
 
    Turns the King into a frontline warrior with a leadership aura.
+   Also removes the Spies/Treason technology from the Castle.
+
    The King's death still defeats its owner (handled by the map and by
    the Regicide game mode, not here).
 
@@ -16,6 +18,7 @@
 
 const int cMyKing = 434;
 const int cMyKnight = 38;  /* attack animation donor if the King has none */
+const int cMySpiesTreason = 408;  /* Castle tech, removed in MY */
 
 const float cMyKingHitpoints = 250.0;
 const int cMyKingMeleeAttack = 12;
@@ -155,6 +158,8 @@ void main() {
     int player = 1;
     bool needsCombatTask = false;
     while (player <= 8) {
+        xsEffectAmount(cDisableTech, cMySpiesTreason, 0, 0, player);
+
         needsCombatTask = myPrepareKingCombat(player);
         myApplyKingStats(player);
         if (needsCombatTask) {
