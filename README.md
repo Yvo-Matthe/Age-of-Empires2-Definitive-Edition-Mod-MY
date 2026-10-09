@@ -6,6 +6,7 @@ MY adds a new random map, **MY_Regicide**, that changes how a Regicide game star
 - **3 starting villagers** instead of the extra Regicide villagers. Civilization bonuses that add villagers (Chinese, Mayans) still apply.
 - **The King is a warrior.** He fights in melee, is much tougher, heals himself out of combat, and gives nearby friendly troops a leadership aura.
 - **No Spies/Treason.** The button is removed from the Castle.
+- **Cavalry comes from soldiers on horses.** See below.
 - **Losing the King still defeats you.** This holds in the Regicide game mode and also if the map is started in plain Random Map mode.
 
 ## King and aura values
@@ -20,6 +21,20 @@ MY adds a new random map, **MY_Regicide**, that changes how a Regicide game star
 **Leadership aura:** friendly and allied military units within **6 tiles** of the King get **+2 attack** and attack **15% faster**. It affects infantry, archers, cavalry, cavalry archers, skirmisher/spear/pike lines, scouts, raiders, elephants, hand cannoneers and conquistadors. The aura range is shown around the King.
 
 All of these numbers are constants at the top of `MY/resources/_common/xs/MY_Regicide.xs` if you want to tune them.
+
+## Cavalry: soldiers mount horses
+
+The Stable no longer trains cavalry for human players. It trains three horses instead:
+
+| Horse | Available | Cost | Swordsman rides it as | Archer rides it as |
+| :-- | :-- | :-- | :-- | :-- |
+| Light horse (fast, no armor) | Feudal Age | 40 food | Scout Cavalry, Light Cavalry or Hussar | Cavalry Archer or Heavy Cavalry Archer |
+| Medium horse (knight armor) | Castle Age | 40 food, 50 gold | Knight, Cavalier or Paladin | cannot ride |
+| Heavy horse (fully armored) | Imperial Age | 80 food, 100 gold | Paladin | cannot ride |
+
+To mount, select a swordsman (Militia line) or archer (Archer line) and right-click one of your horses. About a second later the soldier and horse are replaced by the cavalry unit, at your current Stable upgrade level. Spearmen, skirmishers, monks and villagers cannot mount. Camels, Steppe Lancers, elephants and unique Stable units are unchanged.
+
+**Computer players** cannot use horses, so they keep training cavalry at the Stable, but it costs a soldier plus a horse: the Scout line costs 120 food and the Knight line 100 food and 70 gold.
 
 ## Install
 
@@ -45,5 +60,6 @@ In multiplayer every player should have the mod enabled.
 
 ## Limits
 
+- Mounting replaces the soldier with a new unit, so kill counts and control groups do not carry over, and the new rider starts at full health.
 - The stock maps (Arabia, Arena, ...) are unchanged and still give the usual Regicide Castle and villagers. MY's rules apply on the MY_Regicide map.
 - The mod only uses map scripting and XS, so it does not touch the game's data files and works with game updates as long as these scripting features stay.
