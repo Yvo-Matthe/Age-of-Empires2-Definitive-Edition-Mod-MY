@@ -5,6 +5,7 @@ MY adds a new random map, **MY_Regicide**, that changes how a Regicide game star
 - **No starting Castle.**
 - **3 starting villagers** instead of the extra Regicide villagers. Civilization bonuses that add villagers (Chinese, Mayans) still apply.
 - **The King is a warrior.** He fights in melee, is much tougher, heals himself out of combat, and gives nearby friendly troops a leadership aura.
+- **No Spies/Treason.** The button is removed from the Castle.
 - **Losing the King still defeats you.** This holds in the Regicide game mode and also if the map is started in plain Random Map mode.
 
 ## King and aura values
