@@ -34,7 +34,7 @@ The Stable no longer trains cavalry for human players. It trains three horses in
 
 To mount, select a swordsman (Militia line) or archer (Archer line) and right-click one of your horses. About a second later the soldier and horse are replaced by the cavalry unit, at your current Stable upgrade level. Spearmen, skirmishers, monks and villagers cannot mount. Camels, Steppe Lancers, elephants and unique Stable units are unchanged.
 
-**Computer players** cannot use horses, so they keep training cavalry at the Stable, but it costs a soldier plus a horse: the Scout line costs 120 food and the Knight line 100 food and 70 gold.
+**Computer players use horses too**, with the game's normal AI (no special AI to pick). When the AI orders a Scout, Knight or Cavalry Archer, it pays the horse's price and gets the horse instead: Light for the Scout line and Cavalry Archers, Medium for the Knight line (Heavy once it has Paladin). Every few seconds the mod sends the AI's nearest swordsman or archer (within 40 tiles) to mount each empty horse. If 4 or more of its horses are waiting for riders, the AI's cavalry orders pause until riders catch up.
 
 ## Install
 
