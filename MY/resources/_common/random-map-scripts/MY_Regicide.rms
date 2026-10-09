@@ -1,0 +1,287 @@
+/* ************************************************************************
+   MY Regicide
+   Part of the MY mod for Age of Empires II: Definitive Edition.
+
+   An open land map (Arabia style) with the MY regicide rules:
+     - No starting Castle.
+     - Normal 3 villager start (civilization bonuses such as the Chinese
+       or Mayan extra villagers still apply).
+     - Every player gets a King. The King is a real warrior with a
+       leadership aura; see MY_Regicide.xs for the numbers.
+     - Losing your King still defeats you, in Regicide and in any other
+       game mode this map is played with.
+   ************************************************************************ */
+
+#includeXS MY_Regicide.xs
+
+/* ****************************************************** */
+<PLAYER_SETUP>
+random_placement
+
+/* Lose the game when you no longer control a King. This makes the map
+   regicide even when it is started in Random Map mode. */
+guard_state KING AMOUNT_GOLD 0 1
+
+ai_info_map_type ARABIA 0 0 0
+
+/* ****************************************************** */
+<LAND_GENERATION>
+base_terrain GRASS
+
+create_player_lands
+{
+  terrain_type DIRT
+  land_percent 60
+  base_size 11
+  border_fuzziness 15
+  clumping_factor 15
+  other_zone_avoidance_distance 7
+}
+
+/* ****************************************************** */
+<ELEVATION_GENERATION>
+create_elevation 4
+{
+  base_terrain GRASS
+  number_of_clumps 10
+  number_of_tiles 1600
+  set_scale_by_groups
+  spacing 2
+}
+
+create_elevation 3
+{
+  base_terrain DIRT
+  number_of_clumps 6
+  number_of_tiles 600
+  set_scale_by_groups
+  spacing 2
+}
+
+/* ****************************************************** */
+<TERRAIN_GENERATION>
+
+/* Forests */
+create_terrain FOREST
+{
+  base_terrain GRASS
+  land_percent 9
+  number_of_clumps 14
+  set_scale_by_groups
+  set_avoid_player_start_areas
+  spacing_to_other_terrain_types 3
+  clumping_factor 20
+}
+
+create_terrain FOREST
+{
+  base_terrain DIRT
+  land_percent 3
+  number_of_clumps 6
+  set_scale_by_groups
+  set_avoid_player_start_areas
+  spacing_to_other_terrain_types 3
+  clumping_factor 20
+}
+
+/* Ground detail */
+create_terrain GRASS2
+{
+  base_terrain GRASS
+  number_of_clumps 20
+  number_of_tiles 300
+  set_scale_by_groups
+}
+
+create_terrain DIRT2
+{
+  base_terrain DIRT
+  number_of_clumps 16
+  number_of_tiles 200
+  set_scale_by_groups
+}
+
+/* ****************************************************** */
+<OBJECTS_GENERATION>
+
+/* ---------- Starting units ---------- */
+
+create_object TOWN_CENTER
+{
+  set_place_for_every_player
+  max_distance_to_players 0
+}
+
+/* VILLAGER without number_of_objects gives the normal 3 villager start.
+   The Town Center adds civilization specific extras (Chinese, Mayans).
+   There is deliberately no extra regicide villager group here. */
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players 6
+  max_distance_to_players 6
+}
+
+create_object SCOUT
+{
+  number_of_objects 1
+  set_place_for_every_player
+  min_distance_to_players 7
+  max_distance_to_players 9
+}
+
+create_object KING
+{
+  set_place_for_every_player
+  min_distance_to_players 5
+  max_distance_to_players 6
+}
+
+/* No create_object CASTLE: the MY mod removes the starting Castle. */
+
+/* ---------- Starting resources ---------- */
+
+create_object SHEEP
+{
+  number_of_objects 4
+  set_loose_grouping
+  set_place_for_every_player
+  min_distance_to_players 7
+  max_distance_to_players 8
+}
+
+create_object SHEEP
+{
+  number_of_objects 2
+  number_of_groups 2
+  set_loose_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players 14
+  max_distance_to_players 26
+}
+
+create_object FORAGE
+{
+  number_of_objects 6
+  group_placement_radius 3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players 9
+  max_distance_to_players 11
+  avoid_forest_zone 2
+}
+
+create_object BOAR
+{
+  number_of_objects 1
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players 15
+  max_distance_to_players 18
+}
+
+create_object BOAR
+{
+  number_of_objects 1
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players 18
+  max_distance_to_players 22
+}
+
+create_object DEER
+{
+  number_of_objects 3
+  group_placement_radius 3
+  set_loose_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players 16
+  max_distance_to_players 22
+}
+
+create_object GOLD
+{
+  number_of_objects 7
+  group_placement_radius 3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players 9
+  max_distance_to_players 11
+  avoid_forest_zone 3
+  min_distance_group_placement 7
+}
+
+create_object GOLD
+{
+  number_of_objects 4
+  group_placement_radius 3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players 18
+  max_distance_to_players 24
+  avoid_forest_zone 3
+  min_distance_group_placement 7
+}
+
+create_object STONE
+{
+  number_of_objects 5
+  group_placement_radius 2
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players 12
+  max_distance_to_players 15
+  avoid_forest_zone 3
+  min_distance_group_placement 7
+}
+
+/* ---------- Neutral map ---------- */
+
+create_object GOLD
+{
+  number_of_objects 5
+  number_of_groups 2
+  group_placement_radius 3
+  set_tight_grouping
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players 30
+  avoid_forest_zone 3
+  min_distance_group_placement 9
+}
+
+create_object STONE
+{
+  number_of_objects 4
+  number_of_groups 1
+  group_placement_radius 2
+  set_tight_grouping
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players 30
+  avoid_forest_zone 3
+  min_distance_group_placement 9
+}
+
+create_object WOLF
+{
+  number_of_objects 2
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players 30
+  max_distance_to_players 40
+}
+
+create_object RELIC
+{
+  number_of_objects 5
+  set_gaia_object_only
+  min_distance_to_players 25
+  temp_min_distance_group_placement 20
+}
